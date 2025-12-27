@@ -11,6 +11,7 @@
     <AnalysisLevel>latest-Recommended</AnalysisLevel>
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)Generated</CompilerGeneratedFilesOutputPath>
+    <NoWarn>CA1707,CA2263</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
