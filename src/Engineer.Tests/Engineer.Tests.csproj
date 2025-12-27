@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Engineer\Engineer.csproj"  ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
+    <ProjectReference Include="..\Engineer.Runtime\Engineer.Runtime.csproj" />
   </ItemGroup>
 
   <ItemGroup>
