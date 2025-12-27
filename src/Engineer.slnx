@@ -1,0 +1,9 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Engineer/Engineer.csproj" />
+  <Project Path="Engineer.Tests/Engineer.Tests.csproj" />
+</Solution>
