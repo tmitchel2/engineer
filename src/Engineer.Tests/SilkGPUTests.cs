@@ -3,11 +3,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Engineer.Tests
 {
     [TestClass]
-    public class CpuGPUTests : GPUTests
+    public class SilkGPUTests : GPUTests
     {
         protected override IGPU CreateGPU()
         {
-            return new CpuGPU();
+            return new SilkGPU();
         }
     }
 }
