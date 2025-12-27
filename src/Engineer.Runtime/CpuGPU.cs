@@ -6,8 +6,9 @@ namespace Engineer
 {
     public class CpuGPU : IGPU
     {
-        public Func<T[,], T[,], Task<T[,]>> CreateKernel2D<T>(Func<GPUContext, T[,], T[,], T> func, KernelOptions options)
+        public Func<T[,], T[,], Task<T[,]>> CreateKernel2DExpr<T>(Expression<Func<GPUContext, T[,], T[,], T>> expression, KernelOptions options) where T : unmanaged
         {
+            var func = expression.Compile();
             return (T[,] arg1, T[,] arg2) =>
             {
                 var result = new T[options.XCount, options.YCount];
@@ -22,11 +23,6 @@ namespace Engineer
 
                 return Task.FromResult(result);
             };
-        }
-
-        public Func<T[,], T[,], Task<T[,]>> CreateKernel2DExpr<T>(Expression<Func<GPUContext, T[,], T[,], T>> expression, KernelOptions options)
-        {
-            return CreateKernel2D(expression.Compile(), options);
         }
     }
 }

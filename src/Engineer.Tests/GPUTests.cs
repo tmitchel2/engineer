@@ -16,16 +16,14 @@ namespace Engineer.Tests
             var b = new int[2, 2] { { 5, 6 }, { 7, 8 } };
             var options = new KernelOptions(2, 2);
 
-            var kernel = gpu.CreateKernel2D<int>((ctx, arrA, arrB) =>
-            {
-                return arrA[ctx.Thread.X, ctx.Thread.Y] + arrB[ctx.Thread.X, ctx.Thread.Y];
-            }, options);
+            var kernel = gpu.CreateKernel2DExpr<int>((ctx, arrA, arrB) =>
+                arrA[ctx.Thread.X, ctx.Thread.Y] + arrB[ctx.Thread.X, ctx.Thread.Y], options);
 
             var result = await kernel(a, b);
 
             // result[x,y] = a[x,y] + b[x,y]
             Assert.AreEqual(6, result[0, 0]);   // a[0,0]=1 + b[0,0]=5
-            Assert.AreEqual(8, result[0, 1]);   // a[0,1]=2 + b[0,1]=6  
+            Assert.AreEqual(8, result[0, 1]);   // a[0,1]=2 + b[0,1]=6  Im
             Assert.AreEqual(10, result[1, 0]);  // a[1,0]=3 + b[1,0]=7
             Assert.AreEqual(12, result[1, 1]);  // a[1,1]=4 + b[1,1]=8
         }
@@ -38,10 +36,8 @@ namespace Engineer.Tests
             var b = new int[2, 2] { { 10, 20 }, { 30, 40 } };
             var options = new KernelOptions(2, 2);
 
-            var kernel = gpu.CreateKernel2D<int>((ctx, arrA, arrB) =>
-            {
-                return arrA[ctx.Thread.X, ctx.Thread.Y] * arrB[ctx.Thread.X, ctx.Thread.Y];
-            }, options);
+            var kernel = gpu.CreateKernel2DExpr<int>((ctx, arrA, arrB) =>
+                arrA[ctx.Thread.X, ctx.Thread.Y] * arrB[ctx.Thread.X, ctx.Thread.Y], options);
 
             var result = await kernel(a, b);
 
@@ -59,10 +55,8 @@ namespace Engineer.Tests
             var b = new float[1, 2] { { 0.5f, 0.5f } };
             var options = new KernelOptions(1, 2);
 
-            var kernel = gpu.CreateKernel2D<float>((ctx, arrA, arrB) =>
-            {
-                return arrA[ctx.Thread.X, ctx.Thread.Y] * arrB[ctx.Thread.X, ctx.Thread.Y];
-            }, options);
+            var kernel = gpu.CreateKernel2DExpr<float>((ctx, arrA, arrB) =>
+                arrA[ctx.Thread.X, ctx.Thread.Y] * arrB[ctx.Thread.X, ctx.Thread.Y], options);
 
             var result = await kernel(a, b);
 
@@ -78,10 +72,8 @@ namespace Engineer.Tests
             var b = new int[3, 3] { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } };
             var options = new KernelOptions(3, 3);
 
-            var kernel = gpu.CreateKernel2D<int>((ctx, arrA, arrB) =>
-            {
-                return ctx.Thread.X * 10 + ctx.Thread.Y;
-            }, options);
+            var kernel = gpu.CreateKernel2DExpr<int>((ctx, arrA, arrB) =>
+                ctx.Thread.X * 10 + ctx.Thread.Y, options);
 
             var result = await kernel(a, b);
 
@@ -118,10 +110,8 @@ namespace Engineer.Tests
             var b = new int[1, 1] { { 8 } };
             var options = new KernelOptions(1, 1);
 
-            var kernel = gpu.CreateKernel2D<int>((ctx, arrA, arrB) =>
-            {
-                return arrA[0, 0] + arrB[0, 0];
-            }, options);
+            var kernel = gpu.CreateKernel2DExpr<int>((ctx, arrA, arrB) =>
+                arrA[0, 0] + arrB[0, 0], options);
 
             var result = await kernel(a, b);
 
@@ -147,10 +137,8 @@ namespace Engineer.Tests
 
             var options = new KernelOptions(size, size);
 
-            var kernel = gpu.CreateKernel2D<int>((ctx, arrA, arrB) =>
-            {
-                return arrA[ctx.Thread.X, ctx.Thread.Y] + arrB[ctx.Thread.X, ctx.Thread.Y];
-            }, options);
+            var kernel = gpu.CreateKernel2DExpr<int>((ctx, arrA, arrB) =>
+                arrA[ctx.Thread.X, ctx.Thread.Y] + arrB[ctx.Thread.X, ctx.Thread.Y], options);
 
             var result = await kernel(a, b);
 

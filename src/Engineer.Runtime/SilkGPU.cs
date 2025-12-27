@@ -6,18 +6,13 @@ namespace Engineer
 {
     public class SilkGPU : IGPU
     {
-        public Func<T[,], T[,], Task<T[,]>> CreateKernel2D<T>(Func<GPUContext, T[,], T[,], T> func, KernelOptions options)
+        public Func<T[,], T[,], Task<T[,]>> CreateKernel2DExpr<T>(Expression<Func<GPUContext, T[,], T[,], T>> expression, KernelOptions options) where T : unmanaged
         {
             var gpu = new SilkGPUEngine<T>();
             return async (T[,] a, T[,] b) =>
             {
-                return await gpu.RunAsync(func, a, b, options);
+                return await gpu.RunAsync(expression, a, b, options);
             };
-        }
-
-        public Func<T[,], T[,], Task<T[,]>> CreateKernel2DExpr<T>(Expression<Func<GPUContext, T[,], T[,], T>> expression, KernelOptions options)
-        {
-            return CreateKernel2D(expression.Compile(), options);
         }
     }
 }
